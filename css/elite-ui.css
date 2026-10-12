@@ -1,0 +1,47 @@
+/* ===== MAP + PANEL SEJAJAR ===== */
+#game #topRight{position:absolute;right:14px;top:12px;display:flex;gap:8px;align-items:stretch;pointer-events:none;z-index:2}
+#game #topRight #quest,#game #topRight #minimap{position:static;right:auto;top:auto;transform:none;margin:0}
+#game #topRight #quest{min-width:0;padding:7px 11px;font-size:11px;line-height:1.42;white-space:nowrap}
+#game #topRight #minimap{width:auto;height:auto;padding:4px;display:flex;align-items:center;justify-content:center}
+#game #topRight #mini{width:118px;height:88px}
+@media(max-width:700px){#game #topRight{transform:scale(.86);transform-origin:top right}}
+
+/* ===== TOMBOL SKILL MEWAH ===== */
+#game .actions{display:block;position:absolute;right:20px;bottom:18px;width:178px;height:180px;gap:0}
+#game .actions .btn{--ac:#c080ff;--ac2:#4a1f82;position:absolute;width:64px;height:64px;border:none;overflow:visible;touch-action:none;
+ background:radial-gradient(circle at 50% 28%,color-mix(in srgb,var(--ac) 50%,#fff) 0%,var(--ac) 22%,var(--ac2) 64%,#07040d 100%);
+ box-shadow:0 0 0 2px rgba(12,7,2,.92),0 8px 18px rgba(0,0,0,.6),0 0 20px color-mix(in srgb,var(--ac) 42%,transparent),inset 0 -7px 13px rgba(0,0,0,.5),inset 0 2px 4px rgba(255,255,255,.4);
+ transition:transform .08s,filter .15s,box-shadow .2s}
+#game .actions .btn::before{content:"";position:absolute;inset:-4px;border-radius:50%;padding:3px;pointer-events:none;
+ background:conic-gradient(from 200deg,#fff4b8,#e3b341,#7d5512,#ffe38f,#c8921f,#6e4a0e,#fff0a8,#e3b341,#fff4b8);
+ -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+#game .actions .btn::after{content:"";position:absolute;left:14%;right:14%;top:5%;height:36%;border-radius:50%;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,0))}
+#game .actions .btn .ico{position:relative;z-index:1;font-size:25px;line-height:1;filter:drop-shadow(0 2px 3px rgba(0,0,0,.75))}
+#game .actions .btn .lbl{position:relative;z-index:1;font-size:8px;font-weight:800;letter-spacing:.7px;margin-top:2px;color:#fff3c8;text-shadow:0 1px 2px #000,0 0 6px rgba(0,0,0,.8);text-transform:uppercase}
+#game .actions .btn .cdRing{position:absolute;inset:0;border-radius:50%;pointer-events:none;z-index:2;background:conic-gradient(rgba(4,3,10,.74) var(--cd,0deg),transparent 0)}
+#game .actions .btn .cdNum{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 6px #000,0 2px 3px #000;pointer-events:none}
+#game .actions .btn.cooling{filter:saturate(.6) brightness(.85)}
+#game .actions .btn.pressed{transform:scale(.93)}
+#game .actions .btn.aiming{transform:scale(1.1);box-shadow:0 0 0 2px #000,0 0 28px var(--ac),inset 0 -7px 13px rgba(0,0,0,.5)}
+#game #skillBtn{--ac:#b977ff;--ac2:#40187a;right:100px;bottom:4px}
+#game #dodgeBtn{--ac:#6dffb0;--ac2:#0d5a38;right:172px;bottom:4px}
+#game #dodgeBtn .pips{position:absolute;left:50%;top:-11px;transform:translateX(-50%);display:flex;gap:4px;z-index:4;pointer-events:none}
+#game #dodgeBtn .pips b{width:10px;height:10px;border-radius:50%;background:#10281a;border:1.5px solid #000;box-shadow:0 0 0 1px rgba(255,255,255,.28)}
+#game #dodgeBtn .pips b.on{background:#7dffb0;box-shadow:0 0 7px #7dffb0,0 0 0 1px #fff}
+#game #dodgeBtn.empty{filter:saturate(.5) brightness(.8)}
+#game #dashBtn{--ac:#4fd0ff;--ac2:#0f4468;right:82px;bottom:76px}
+#game #ultBtn{--ac:#ffc94d;--ac2:#7a4b08;width:70px;height:70px;right:8px;bottom:100px}
+#game #attack{--ac:#ff6a5c;--ac2:#7a1420;width:86px;height:86px;right:0;bottom:0}
+#game #attack .ico{font-size:30px}
+#game #ultBtn.ready{animation:ultGlow 1.2s infinite}
+@keyframes ultGlow{0%,100%{box-shadow:0 0 0 2px #000,0 0 14px rgba(255,200,80,.5),inset 0 -7px 13px rgba(0,0,0,.5)}50%{box-shadow:0 0 0 2px #000,0 0 30px rgba(255,225,130,.95),inset 0 -7px 13px rgba(0,0,0,.5)}}
+@media(max-width:700px){#game .actions{transform:scale(.86);transform-origin:bottom right}}
+
+/* ===== PAD ARAH SKILL ===== */
+#aimPad{position:absolute;width:156px;height:156px;margin:-78px 0 0 -78px;border-radius:50%;pointer-events:none;display:none;z-index:7;
+ border:2px dashed rgba(255,214,120,.75);background:radial-gradient(circle,rgba(255,220,130,.16),rgba(0,0,0,.34) 72%);box-shadow:0 0 26px rgba(255,200,90,.35),inset 0 0 22px rgba(255,200,90,.18)}
+#aimPad.on{display:block}
+#aimPad .aimLn{position:absolute;left:50%;top:50%;height:3px;margin-top:-1.5px;width:var(--len,0px);transform-origin:0 50%;transform:rotate(var(--rot,0rad));background:linear-gradient(90deg,transparent,var(--ac,#ffd36a));border-radius:3px}
+#aimPad .aimDot{position:absolute;left:50%;top:50%;width:28px;height:28px;margin:-14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--ac,#ffd36a));box-shadow:0 0 16px var(--ac,#ffd36a);transform:translate(var(--dx,0px),var(--dy,0px))}
+#aimPad .aimTxt{position:absolute;left:50%;top:-22px;transform:translateX(-50%);white-space:nowrap;font-size:9px;font-weight:800;letter-spacing:1px;color:#ffe9a8;text-shadow:0 1px 3px #000}
+#aimPad.cancel{border-color:rgba(255,120,120,.8)}#aimPad.cancel .aimDot{filter:grayscale(1)}

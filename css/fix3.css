@@ -1,0 +1,3 @@
+body.cutscene #relicBar{display:none!important}
+#charTabs{flex-wrap:wrap!important;overflow:visible!important;justify-content:center!important;gap:6px!important;padding:8px 0 6px!important}
+#charTabs button{flex:0 0 auto!important;min-width:max-content;height:auto!important;min-height:30px;padding:6px 11px!important;font-size:11px!important;line-height:1.2!important;white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important}

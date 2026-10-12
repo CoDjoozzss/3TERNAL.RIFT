@@ -1,0 +1,4 @@
+#bossIntro{display:none!important}#bossIntro.active{display:flex!important}
+#game .hud,#game #quest,#game #minimap,#game #shopBtn,#game #pauseBtn,#game #controls,#game #combo,#game #zone,#game #hpBarLow,#game #buffIcons{transition:opacity .5s}
+#game.cine .hud,#game.cine #quest,#game.cine #minimap,#game.cine #shopBtn,#game.cine #pauseBtn,#game.cine #controls,#game.cine #combo,#game.cine #zone,#game.cine #hpBarLow,#game.cine #buffIcons,#game.cine #toast{opacity:0!important;pointer-events:none!important}
+#game.cine #controls *{pointer-events:none!important}

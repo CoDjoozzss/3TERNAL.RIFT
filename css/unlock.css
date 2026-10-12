@@ -1,0 +1,4 @@
+.card.locked{opacity:.8}
+.card.locked .preview{filter:grayscale(1) brightness(.22)}
+.card.locked .nm,.card.locked .sub2{color:#9aa79a!important}
+.lockTag{margin-top:5px;font-size:10px;font-weight:900;letter-spacing:.5px;color:#ffd36a;background:rgba(0,0,0,.6);padding:3px 6px;border-radius:8px;text-align:center}

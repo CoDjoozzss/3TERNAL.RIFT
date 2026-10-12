@@ -1,0 +1,5 @@
+#statPop{display:none!important}
+.shopStats{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin:-2px 0 12px}
+.sChip{display:inline-flex;gap:4px;align-items:center;padding:4px 9px;border-radius:999px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12);font-size:10px;color:#b9c6b9}
+.sChip b{color:#fff}
+.pv{font-size:9px;color:#b9c6b9;margin-top:-2px;min-height:12px}.pv b{color:#fff}.pv .nx{color:#7dff9b}

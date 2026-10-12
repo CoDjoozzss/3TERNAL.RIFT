@@ -1,0 +1,171 @@
+/* ===== TEMA FOREST: menu, pilih hero, index, pengaturan, tentang, cara bermain ===== */
+:root{--scene-img:url("../assets/images/bg-67d17ea7.jpg");--fg:#06150d;--fm:#2f6b3a;--fl:#6fbf5a;--fx:#c6f08a;--fgold:#f2d37a;--fcream:#eaf5dc;--fline:rgba(190,235,150,.28)}
+
+/* Latar: gambar asli diwarnai hijau hutan + cahaya emas, dipakai menu & pilih hero */
+#charSel::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:radial-gradient(ellipse at 72% 36%,rgba(255,226,140,.5),transparent 50%),linear-gradient(rgba(40,132,62,.86),rgba(40,132,62,.86)),var(--scene-img);
+ background-size:auto,auto,cover;background-position:center;background-blend-mode:soft-light,color,normal;filter:brightness(1.18) saturate(1.1)}
+#start .startScene{background-image:linear-gradient(90deg,rgba(3,18,9,.84) 0%,rgba(4,24,12,.5) 25%,rgba(4,24,12,0) 55%,rgba(3,16,8,.4) 100%),linear-gradient(0deg,rgba(2,14,7,.72),transparent 34%),radial-gradient(ellipse at 55% 45%,transparent 52%,rgba(2,12,6,.5))}
+#start .startScene:before{inset:-10%;background:radial-gradient(ellipse at 18% 100%,rgba(200,240,170,.2),transparent 55%),radial-gradient(ellipse at 85% 95%,rgba(200,240,170,.15),transparent 50%),linear-gradient(110deg,transparent 40%,rgba(255,235,150,.09),transparent 70%)}
+#start .startScene:after{inset:-3%;opacity:1;background-image:
+ radial-gradient(circle at 14% 62%,#f4ffb0 0 2px,rgba(200,255,120,.3) 3px 9px,transparent 10px),radial-gradient(circle at 33% 78%,#f4ffb0 0 2px,rgba(200,255,120,.3) 3px 9px,transparent 10px),
+ radial-gradient(circle at 52% 55%,#f4ffb0 0 2px,rgba(200,255,120,.3) 3px 9px,transparent 10px),radial-gradient(circle at 68% 82%,#f4ffb0 0 2px,rgba(200,255,120,.3) 3px 9px,transparent 10px),
+ radial-gradient(circle at 81% 48%,#f4ffb0 0 2px,rgba(200,255,120,.3) 3px 9px,transparent 10px),radial-gradient(circle at 92% 70%,#f4ffb0 0 2px,rgba(200,255,120,.3) 3px 9px,transparent 10px),
+ radial-gradient(circle at 42% 30%,#f4ffb0 0 2px,rgba(200,255,120,.3) 3px 9px,transparent 10px);
+ background-size:100% 100%;background-repeat:no-repeat;animation:forestFly 7s ease-in-out infinite alternate}
+#start .sceneGlow{background:repeating-conic-gradient(from 0deg at 68% 30%,rgba(255,236,150,.07) 0 5deg,transparent 5deg 17deg)}
+@keyframes forestFly{from{transform:translate3d(0,0,0);opacity:.45}to{transform:translate3d(12px,-16px,0);opacity:1}}
+@keyframes forestIn{0%{opacity:0;transform:translateX(-30px)}100%{opacity:1;transform:none}}
+@keyframes forestPulse{0%,100%{box-shadow:0 0 14px rgba(150,230,100,.22)}50%{box-shadow:0 0 24px rgba(170,240,110,.45)}}
+@keyframes leafFall{0%{transform:translate3d(0,-12vh,0) rotate(0)}100%{transform:translate3d(60px,112vh,0) rotate(400deg)}}
+.leaf{position:absolute;top:0;z-index:1;font-style:normal;pointer-events:none;opacity:.8;animation:leafFall linear infinite}
+#start.lobby-backdrop .leaf{display:none}
+
+/* Logo */
+#start .brandSigil{background:radial-gradient(circle at 35% 30%,#3f8a48,#0d2e18);border:1px solid #cdeaa0;box-shadow:0 0 22px rgba(150,230,100,.55);animation:none;color:#fff}
+#start .startScene .brandTitle{font-family:Georgia,'Times New Roman',serif;font-weight:900;letter-spacing:2px;color:#f6e7a6;text-shadow:0 2px 0 #3a5a1c,0 0 24px rgba(160,235,110,.6),0 5px 14px rgba(0,0,0,.65)}
+#start .brandRpg{color:#f1ffd8;border:1px solid #cdeaa0;background:linear-gradient(180deg,#5e9b45,#2f6b3a);box-shadow:0 0 14px rgba(120,210,90,.4);text-shadow:0 1px 2px rgba(0,0,0,.5)}
+#start .brandWorld{color:#d3ecbd;text-shadow:0 1px 4px #000}
+#start .topGlyph{color:#d6f2a0;text-shadow:0 0 14px rgba(160,240,100,.9)}
+
+/* Menu: papan penunjuk jalan di tiang kayu */
+#start .startSidebar:before{content:"";position:absolute;z-index:-1;left:-16%;right:-34%;top:-8%;bottom:-10%;pointer-events:none;background:radial-gradient(ellipse at 38% 50%,rgba(2,22,10,.72),rgba(2,22,10,.4) 52%,transparent 74%)}
+#start .brandMark:after{display:block;content:"";height:1px;margin:clamp(6px,1.4vh,12px) auto 0;width:80%;background:linear-gradient(90deg,transparent,#cdeaa0,transparent)}
+#start .menuList{position:relative;gap:clamp(5px,1.2vh,10px);filter:drop-shadow(0 5px 7px rgba(0,0,0,.5))}
+#start .menuList:before{content:"";position:absolute;z-index:0;left:12px;top:-12px;bottom:-14px;width:10px;border-radius:5px;background:linear-gradient(90deg,#2e1e0f,#7a5230 45%,#38240f);box-shadow:inset 0 0 0 1px rgba(0,0,0,.35)}
+#start .menuItem{position:relative;z-index:1;border:0;border-radius:3px 0 0 3px;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%);padding:0 22px 0 7px;gap:9px;color:#fbf0d4;font-weight:700;text-shadow:0 1px 0 rgba(0,0,0,.6);
+ background:repeating-linear-gradient(90deg,rgba(0,0,0,.06) 0 2px,transparent 2px 11px),linear-gradient(180deg,#936538,#6b4526);
+ box-shadow:inset 0 1px 0 rgba(255,226,170,.4),inset 0 -2px 0 rgba(0,0,0,.32),inset 0 0 0 1px rgba(36,22,9,.55);animation:forestIn .5s ease backwards;transition:transform .2s,filter .2s}
+#start #toChar{color:#fbf0d4;text-shadow:0 1px 0 rgba(0,0,0,.6)}
+#start #toIndex{animation-delay:.07s}#start #toSettings{animation-delay:.14s}#start #toHowto{animation-delay:.21s}#start #toAbout{animation-delay:.28s}
+#start .menuItem span{background:radial-gradient(circle at 35% 30%,#8fd45a,#2f6b3a);border:1.5px solid #ecdca4;color:#fff;box-shadow:inset 0 -2px 0 rgba(0,0,0,.2)}
+#start .menuItem b{margin-right:2px}
+#start .menuItem:hover{transform:translateX(7px);filter:brightness(1.14);box-shadow:inset 0 1px 0 rgba(255,226,170,.4),inset 0 -2px 0 rgba(0,0,0,.32),inset 0 0 0 1px rgba(36,22,9,.55)}
+#start .menuItem:active{transform:translateX(3px) scale(.99);filter:brightness(1)}
+#start .menuItem.selected,#start #toChar.selected{color:#f4ffd8;background:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 2px,transparent 2px 11px),linear-gradient(180deg,#72b351,#2d6a37);
+ box-shadow:inset 0 1px 0 rgba(240,255,190,.5),inset 0 -2px 0 rgba(0,0,0,.3),inset 0 0 0 1px rgba(214,244,150,.7);animation:forestIn .5s ease backwards,plankGlow 2.8s ease-in-out .6s infinite}
+#start .menuItem.selected:active{animation:none}
+@keyframes plankGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.2)}}
+#start .sidebarFoot{color:#d3ecbd;background:rgba(6,24,13,.6);border:1px solid var(--fline);border-radius:14px 14px 14px 3px;box-shadow:none;text-shadow:0 1px 3px #000}
+
+/* Tajuk pohon + trunk di tepi layar */
+#start .canopy{position:absolute;inset:0;z-index:1;pointer-events:none;background:
+ radial-gradient(ellipse 22% 11% at 4% -1%,#0c3320 62%,transparent 64%),radial-gradient(ellipse 18% 9% at 20% -2%,#134a2c 62%,transparent 64%),radial-gradient(ellipse 24% 12% at 40% -3%,#0c3320 62%,transparent 64%),
+ radial-gradient(ellipse 20% 10% at 60% -2%,#154d2e 62%,transparent 64%),radial-gradient(ellipse 24% 12% at 82% -3%,#0c3320 62%,transparent 64%),radial-gradient(ellipse 16% 9% at 98% 0,#134a2c 62%,transparent 64%),
+ linear-gradient(180deg,rgba(2,16,8,.55),transparent 20%)}
+
+/* Kartu kanan */
+#start .worldCard,#start .continueBanner{border:1px solid var(--fline);border-radius:18px 4px 18px 4px;background:linear-gradient(135deg,rgba(9,34,18,.8),rgba(22,64,34,.5));box-shadow:0 8px 24px rgba(0,0,0,.35),inset 0 0 22px rgba(120,210,90,.07);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+#start .worldCardIcon,#start .bannerOrb{border:1px solid #cdeaa0;color:#fff;background:radial-gradient(circle at 35% 30%,#7fc65a,#245a2e);box-shadow:0 0 16px rgba(150,230,100,.5);text-shadow:none}
+#start .worldCard strong,#start .continueBanner strong{color:#f6e7a6}
+#start .worldCard small,#start .continueBanner small{color:#a9d894}
+#start .continueBanner p{color:#d3ecbd}
+#start .continueBanner button{border:1px solid #d6f2a0;background:linear-gradient(180deg,#b7e86a,#5faa3e);color:#0c2410;box-shadow:0 0 14px rgba(150,230,100,.4)}
+#start .sceneCaption,#start .verTag{color:#d3ecbd;background:rgba(6,24,13,.55);border:1px solid var(--fline)}
+#start .captionLine{background:#c6f08a}
+#start .heroSilhouette:before{background:linear-gradient(120deg,rgba(1,18,8,.96),rgba(10,52,28,.8),rgba(0,0,0,.8));filter:drop-shadow(0 0 15px #4fd04a)}
+#start .heroSilhouette:after{background:linear-gradient(90deg,#08210f,#17442a,#021508);border-top:2px solid #b7f08a}
+#start .heroAura{background:radial-gradient(ellipse,rgba(110,220,90,.3),transparent 65%)}
+#start .heroSword{background:linear-gradient(180deg,#fff,#b7f08a 55%,transparent);box-shadow:0 0 8px #b7f08a,0 0 20px #5fcf4a}
+
+/* Cara bermain */
+#start .howtoOverlay{color:var(--fcream);background:linear-gradient(160deg,rgba(10,38,21,.93),rgba(5,20,11,.95));border:1px solid rgba(190,235,150,.4);border-radius:18px 4px 18px 4px;box-shadow:0 14px 36px rgba(0,0,0,.55),inset 0 0 30px rgba(100,190,80,.08);font-weight:600}
+#start .howtoOverlay b{color:var(--fgold);letter-spacing:2px}
+
+/* Pilih hero */
+#charSel{background:#04120a}
+#charSel .characterScene{background:linear-gradient(100deg,rgba(2,14,8,.86),rgba(4,24,12,.66) 45%,rgba(2,14,8,.86))}
+.charSceneBg{background:radial-gradient(ellipse at 58% 44%,rgba(120,210,90,.16),transparent 40%),radial-gradient(ellipse at 90% 85%,rgba(255,225,130,.09),transparent 36%)}
+.charSceneBg:after{background:repeating-linear-gradient(115deg,transparent 0 90px,rgba(190,240,140,.035) 91px 92px)}
+.charHeader{border-bottom:1px solid var(--fline);background:linear-gradient(90deg,rgba(3,18,9,.86),rgba(10,40,22,.4))}
+.charHeader .eyebrow,.idxHead .eyebrow{color:#a9e07a}.charHeader h2 span,.idxHead h2 span{color:var(--fx);text-shadow:0 0 14px rgba(150,230,100,.5)}.charHeader p{color:#a9c9a0}
+.rosterCount{border-left:1px solid var(--fline)}.rosterCount strong,.idxCount strong{color:#f6e7a6;text-shadow:0 0 14px rgba(190,240,110,.5)}.rosterCount small,.idxCount small{color:#a9c9a0}
+#start .backOrb,.backOrb{border:1px solid rgba(190,235,150,.45);background:rgba(6,26,14,.6);color:#eaf5dc;box-shadow:none}
+.rosterPanel,.portraitPanel,.heroDetails{background:linear-gradient(150deg,rgba(10,38,21,.8),rgba(4,18,10,.8));border:1px solid var(--fline);border-radius:16px 4px 16px 4px;box-shadow:inset 0 0 40px rgba(90,170,70,.06)}
+.portraitPanel{background:radial-gradient(ellipse at 50% 44%,rgba(110,200,80,.2),transparent 62%),linear-gradient(160deg,rgba(8,32,18,.88),rgba(3,14,8,.92))}
+.rosterTitle,.detailLabel,.skillLabel{color:#cfe6bf}.rosterHint{color:#86a97a}
+#charTabs button{background:rgba(8,30,16,.72);border:1px solid rgba(190,235,150,.22);color:#b8d4a8}
+#charTabs button.active{background:linear-gradient(135deg,#5f9d45,#2f6b3a);color:#f6ffe8;border-color:#cdeaa0;box-shadow:0 0 13px rgba(130,220,90,.3)}
+.card{border:1px solid rgba(190,235,150,.22);background:linear-gradient(180deg,rgba(14,44,25,.9),rgba(5,20,11,.96))}
+.card:hover{border-color:#9fdc78}
+.card.sel{border:1px solid var(--fgold);background:linear-gradient(180deg,rgba(84,80,34,.45),rgba(10,32,18,.96));box-shadow:0 0 0 1px rgba(242,211,122,.45),0 0 20px rgba(242,200,90,.25)}
+.card .previewWrap{background:radial-gradient(ellipse at 50% 80%,rgba(120,210,90,.3),transparent 65%),linear-gradient(150deg,rgba(40,92,50,.55),rgba(5,20,11,.3));border-bottom:1px solid rgba(190,235,150,.15)}
+.card.sel .preview{filter:drop-shadow(0 0 8px rgba(190,240,110,.55))}
+.card .sub2{color:#9fbf92}.card .stats2{color:#bddcae}
+.rosterFooter{border-top:1px solid rgba(190,235,150,.15);color:#a9c9a0}.footerRule{background:rgba(190,235,150,.18)}#selectedHeroLabel{color:var(--fgold)}
+.cards{scrollbar-color:#3f7a45 #08170d}
+.portraitRings{border-color:rgba(150,225,110,.25);box-shadow:0 0 0 14px rgba(90,200,70,.03),0 0 0 34px rgba(90,200,70,.02)}
+.portraitRings:before,.portraitRings:after,.portraitParticles{color:#c8f58a;text-shadow:0 0 12px #7fe05a}
+.portraitTopline{color:#a9c9a0}.liveDot{color:#c6f08a}.portraitFloor{background:radial-gradient(ellipse,rgba(120,220,80,.34),transparent 68%)}
+#heroPortrait{filter:drop-shadow(0 0 12px rgba(120,220,80,.5))}
+.portraitNameplate small,.portraitNameplate span,.detailRole{color:#b5e48a}
+.portraitStats>div,.detailBars>div{color:#bddcae}.statTrack,.detailBars b{background:#123220}
+.statTrack i,.detailBars i{background:linear-gradient(90deg,#4fae45,#c8f06a);box-shadow:0 0 8px rgba(130,220,80,.6)}
+.detailName{text-shadow:0 0 18px rgba(130,220,80,.35)}.heroDetails>p{color:#bddcae}
+.portraitSkills span{border:1px solid rgba(190,235,150,.45);background:linear-gradient(145deg,rgba(40,100,55,.7),rgba(3,18,9,.85));box-shadow:inset 0 0 10px rgba(130,220,80,.15)}
+.charInfoSub{color:#a9c9a0}.skillInfo{background:rgba(5,24,13,.7);border-color:rgba(190,235,150,.14)}
+.chooseButton{background:linear-gradient(100deg,#4f9a3c,#9bd44e)!important;color:#0c2410!important;border:1px solid #d6f2a0!important;box-shadow:0 0 20px rgba(130,220,80,.3)!important}
+.heroDetails .startHint{color:#86a97a}
+
+/* Index, Pengaturan, Tentang: kaca hutan yang tembus ke latar */
+#settingsScreen,#aboutScreen{background:radial-gradient(ellipse at 50% 30%,rgba(10,44,24,.45),rgba(2,12,6,.8));-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+#indexScreen{background:linear-gradient(145deg,rgba(3,18,9,.76),rgba(2,12,6,.88)),radial-gradient(ellipse at 50% 0%,rgba(40,110,55,.4),transparent 68%);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+#settingsScreen .box,#aboutScreen .box{background:linear-gradient(155deg,rgba(11,40,22,.9),rgba(4,18,10,.93));border:1px solid rgba(190,235,150,.3);border-radius:22px 6px 22px 6px;box-shadow:0 24px 60px rgba(0,0,0,.55),inset 0 0 40px rgba(100,190,80,.07)}
+#settingsScreen .screenH{color:var(--fx)!important;text-shadow:0 0 14px rgba(150,230,100,.4)}
+#aboutScreen h1{background:linear-gradient(180deg,#fffbe0,#e6d27a);-webkit-background-clip:text;background-clip:text}
+#aboutScreen .sub{color:#a9e07a!important}
+.groupLabel{color:#a9e07a}.settingLabel{color:var(--fcream)}.settingDesc{color:#8fae84}
+.settingRow{background:rgba(4,22,12,.55);border:1px solid rgba(190,235,150,.14)}
+.settingIcon{background:linear-gradient(145deg,rgba(150,225,110,.16),rgba(60,130,60,.08));border:1px solid rgba(190,235,150,.25)}
+.segmented{background:rgba(0,0,0,.45)}.segmented button{color:#8fae84}
+.segmented button.active{background:linear-gradient(180deg,#8fd45a,#3f8a3e);color:#06200e}
+.aboutBadge{background:rgba(190,235,150,.12);border:1px solid rgba(190,235,150,.35);color:var(--fgold)}
+.aboutStat{background:rgba(4,22,12,.5);border:1px solid rgba(190,235,150,.14)}
+.aboutStat .num{background:linear-gradient(180deg,#fffbe0,#9bdc6a);-webkit-background-clip:text;background-clip:text}
+.aboutStat .lbl{color:#a9c9a0}.aboutText{color:#c4d8b8}.creditsRow{background:rgba(4,22,12,.5);border-color:rgba(190,235,150,.12)}.creditsRow .line{color:#8fae84}
+#settingsScreen .btn-big.primary,#aboutScreen .btn-big.primary{background:linear-gradient(180deg,#9bd44e,#3f8a3e);color:#06200e;border:1px solid #d6f2a0;box-shadow:0 0 20px rgba(130,220,80,.3)}
+#settingsScreen .btn-big.ghost,#aboutScreen .btn-big.ghost{color:#cfe6bf;border-color:rgba(190,235,150,.25);background:rgba(190,235,150,.05)}
+.idxWrap{color:var(--fcream)}.idxHead h2{text-shadow:0 0 20px rgba(120,220,80,.45)}
+.idxBars>div{background:rgba(4,22,12,.6);border:1px solid rgba(190,235,150,.16)}.idxBars span,.idxSub,.idxEmpty{color:#9fbf92}
+.idxBars i u{background:linear-gradient(90deg,#4fae45,#c8f06a)}
+#idxTabs button{background:rgba(4,22,12,.6);border-color:rgba(190,235,150,.22);color:#b8d4a8}
+#idxTabs button.active{background:linear-gradient(180deg,#9bd44e,#3f8a3e);color:#06200e}
+#idxJump{background:rgba(4,22,12,.8);color:#d3ecbd;border-color:rgba(190,235,150,.25)}
+.idxGrid{scrollbar-color:#3f7a45 transparent}
+.idxGroupHead{color:#a9e07a;border-bottom-color:rgba(190,235,150,.18);background:linear-gradient(180deg,rgba(3,16,8,.97),rgba(3,16,8,.85))}
+.idxCard{border:1px solid rgba(190,235,150,.2);background:linear-gradient(160deg,rgba(14,44,25,.85),rgba(5,20,11,.9))}
+.idxCard:hover{border-color:rgba(214,244,150,.55)}.idxTag{background:rgba(70,150,70,.88)}
+.idxCard.locked .idxName{color:#5f8a62}.idxCard.locked .idxSpr canvas{filter:drop-shadow(0 0 5px rgba(100,200,90,.35))}
+.idxDetail{background:rgba(2,12,6,.78)}
+.idxDCard{border:1px solid rgba(190,235,150,.35);background:linear-gradient(155deg,rgba(11,40,22,.98),rgba(4,18,10,.99))}
+.idxDetail.boss .idxDCard{border-color:rgba(255,205,110,.5);background:linear-gradient(155deg,rgba(44,38,14,.98),rgba(10,14,5,.99))}
+.idxDSpr{background:radial-gradient(circle,rgba(110,200,80,.22),rgba(0,0,0,.35));border:1px solid rgba(190,235,150,.2)}
+.idxDType{color:#a9e07a}.idxDHab,.idxDStats span{color:#9fbf92}.idxDInfo p{color:#c4d8b8}
+.idxDClose{background:linear-gradient(180deg,#9bd44e,#3f8a3e);color:#06200e}
+#fullscreenPrompt{color:#0c2410;border:1px solid #d6f2a0;background:linear-gradient(180deg,#b7e86a,#5faa3e);box-shadow:0 0 18px rgba(130,220,80,.4)}
+
+/* Kartu kanan: papan kayu yang digantung tali */
+#start .worldCard,#start .continueBanner{position:relative;margin-top:14px;border:2px solid #7a5230;border-radius:8px;background:linear-gradient(160deg,rgba(14,46,26,.93),rgba(6,26,14,.93));box-shadow:0 8px 20px rgba(0,0,0,.45),inset 0 0 0 1px rgba(236,220,164,.28),inset 0 0 22px rgba(100,190,80,.08)}
+#start .worldCard:before,#start .worldCard:after,#start .continueBanner:before,#start .continueBanner:after{content:"";position:absolute;top:-15px;width:2px;height:14px;background:#6b4526}
+#start .worldCard:before,#start .continueBanner:before{left:20%}#start .worldCard:after,#start .continueBanner:after{right:20%}
+#start .worldCard small{letter-spacing:.3px;line-height:1.4}
+#start .startScene{background:#0f3a24!important}
+
+/* ===== Pilih hero: papan & plakat kayu ===== */
+.charHeader{border-bottom:3px solid #6b4526;background:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 2px,transparent 2px 12px),linear-gradient(180deg,rgba(66,42,22,.92),rgba(40,26,13,.92));box-shadow:0 6px 14px rgba(0,0,0,.4)}
+.charHeader h2{color:#fbf0d4;text-shadow:0 2px 0 rgba(0,0,0,.5)}
+.backOrb{border:2px solid #ecdca4;background:radial-gradient(circle at 35% 30%,#8fd45a,#2f6b3a);color:#fff}
+.rosterPanel,.portraitPanel,.heroDetails{border:2px solid #6b4526;box-shadow:inset 0 0 0 1px rgba(236,220,164,.18),inset 0 0 40px rgba(90,170,70,.06),0 8px 18px rgba(0,0,0,.35)}
+#charTabs button{border-radius:3px;border:1px solid #2a1a0a;background:repeating-linear-gradient(90deg,rgba(0,0,0,.06) 0 2px,transparent 2px 9px),linear-gradient(180deg,#8a5e36,#64411f);color:#fbf0d4;text-shadow:0 1px 0 rgba(0,0,0,.55);box-shadow:inset 0 1px 0 rgba(255,226,170,.35)}
+#charTabs button.active{background:linear-gradient(180deg,#72b351,#2d6a37);border-color:#d6f2a0;color:#f4ffd8;box-shadow:0 0 12px rgba(130,220,80,.35)}
+.card{border:2px solid #6b4526;border-radius:6px;background:linear-gradient(180deg,rgba(14,44,25,.92),rgba(5,20,11,.97));box-shadow:inset 0 0 0 1px rgba(236,220,164,.14)}
+.card:hover{border-color:#b98a4e}.card.sel{border-color:var(--fgold)}.card .nm{color:#fbf0d4}
+.chooseButton{clip-path:polygon(0 0,calc(100% - 16px) 0,100% 50%,calc(100% - 16px) 100%,0 100%);border-radius:3px 0 0 3px!important;padding-right:26px!important;background:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 2px,transparent 2px 11px),linear-gradient(180deg,#72b351,#2d6a37)!important;color:#f4ffd8!important;border:0!important;box-shadow:inset 0 1px 0 rgba(240,255,190,.5),inset 0 -2px 0 rgba(0,0,0,.3),inset 0 0 0 1px rgba(214,244,150,.7)!important}
+
+/* ===== Suasana sesuai jam ===== */
+#start .todTint{position:absolute;inset:0;z-index:1;pointer-events:none}
+#start[data-tod=dawn] .todTint{background:linear-gradient(180deg,rgba(255,226,140,.16),rgba(255,240,200,.06))}
+#start[data-tod=dusk] .todTint{background:linear-gradient(180deg,rgba(255,120,60,.2),rgba(120,40,80,.12))}
+#start[data-tod=night] .todTint{background:rgba(4,18,40,.4)}
+#start[data-tod=day] .startScene:after{filter:opacity(.35)}
+#start[data-tod=night] .startScene:after{filter:brightness(1.5)}

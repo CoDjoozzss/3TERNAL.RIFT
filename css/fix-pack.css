@@ -1,0 +1,46 @@
+#bootMask{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#07110d;color:#cfe8cf;font:700 14px system-ui,Arial,sans-serif;letter-spacing:2px;transition:opacity .4s}
+#bootMask.off{opacity:0;pointer-events:none}
+#bootMask i{width:34px;height:34px;border:4px solid rgba(255,255,255,.15);border-top-color:#9be988;border-radius:50%;animation:bootSpin .9s linear infinite}
+@keyframes bootSpin{to{transform:rotate(360deg)}}
+/* kontras & keterbacaan */
+.hud,#quest,#zone,#toast,.buffIcons,.stats{text-shadow:0 1px 2px #000,0 0 5px rgba(0,0,0,.9)}
+#zone{background:rgba(0,0,0,.35);padding:2px 10px;border-radius:8px;max-width:38vw;overflow:hidden;text-overflow:ellipsis}
+#quest{max-width:min(44vw,270px);overflow-wrap:anywhere}
+.hud .name,#hudName{overflow-wrap:anywhere;max-width:46vw}
+.settingLabel,.settingDesc,.screen .box p{overflow-wrap:anywhere}
+/* tombol: jarak aman & umpan balik tekan */
+#shopBtn,#pauseBtn{width:52px;height:52px}
+#pauseBtn{top:160px}
+.btn:active,.menuItem:active,.backOrb:active{transform:scale(.9)!important;filter:brightness(1.35)}
+.btn-big:active{transform:scale(.95)!important;filter:brightness(1.25)}
+.actions{gap:max(10px,1.2vw)}
+/* joystick: area aman di tepi layar + hit area lebih lebar */
+#joy{left:max(22px,calc(env(safe-area-inset-left,0px) + 14px));bottom:max(22px,calc(env(safe-area-inset-bottom,0px) + 14px))}
+.actions{right:max(22px,calc(env(safe-area-inset-right,0px) + 14px));bottom:max(25px,calc(env(safe-area-inset-bottom,0px) + 14px))}
+#joy::before{content:'';position:absolute;inset:-24px;border-radius:50%}
+/* scrollbar tipis tapi terlihat */
+.screen .box,#idxGrid,.shopGrid,#charTabs{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.45) rgba(255,255,255,.08)}
+.screen .box::-webkit-scrollbar,#idxGrid::-webkit-scrollbar,.shopGrid::-webkit-scrollbar{width:7px;height:7px}
+.screen .box::-webkit-scrollbar-thumb,#idxGrid::-webkit-scrollbar-thumb,.shopGrid::-webkit-scrollbar-thumb{background:rgba(255,255,255,.4);border-radius:6px}
+/* portrait: susun ulang agar tidak menumpuk */
+@media(orientation:portrait){#quest{font-size:11px;max-width:48vw}#zone{top:auto;bottom:6px}#minimap{top:auto;bottom:70px}}
+/* perangkat low-end / reduced motion */
+.lowfx .leaf,.lowfx .portraitParticles{display:none!important}
+.lowfx .sceneGlow,.lowfx .canopy,.lowfx .heroAura{animation:none!important}
+/* ukuran teks (Kecil/Sedang/Besar) */
+.hud,#quest,#toast,#zone,.screen .box>*{zoom:var(--ui-zoom,1)}
+/* kontras tinggi */
+body.hc .panel,body.hc #quest,body.hc #minimap{background:rgba(0,0,0,.95)!important;border-color:#fff!important}
+body.hc .hud,body.hc #quest,body.hc #zone,body.hc .stats,body.hc .buffIcons{color:#fff!important;text-shadow:0 0 3px #000,0 0 7px #000,0 1px 0 #000}
+body.hc .btn{background:rgba(0,0,0,.92)!important;border-color:#fff!important}
+body.hc #c{filter:contrast(1.18) saturate(1.1)}
+/* palet ramah buta warna (Okabe-Ito) + pola agar tak bergantung warna */
+body.cb .hp{background:repeating-linear-gradient(45deg,rgba(255,255,255,.3) 0 4px,transparent 4px 8px),linear-gradient(90deg,#d55e00,#f0a030)!important}
+body.cb .xp{background:linear-gradient(90deg,#0072b2,#56b4e9)!important}
+body.cb #diffTier{color:#f0e442!important}
+/* panduan */
+#guideScreen .box{text-align:left}
+#guideScreen h3{margin:14px 0 4px;font-size:14px;color:#a9f3b0;letter-spacing:1px}
+#guideScreen p,#guideScreen li{font-size:12.5px;line-height:1.55;color:#d6e2d6;margin:3px 0}
+#guideScreen ul{padding-left:18px;margin:4px 0}
+#siTip{margin-top:12px;font-size:12px;color:#ffe9a8;max-width:520px;line-height:1.5}

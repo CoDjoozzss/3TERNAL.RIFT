@@ -1,0 +1,75 @@
+/* ===== MENU CUBBY: gaya bulat-gemuk, serasi dengan padang slime ===== */
+#start{--chub:'Fredoka','Baloo 2','Nunito','Varela Round',ui-rounded,'SF Pro Rounded','Arial Rounded MT Bold','Trebuchet MS',system-ui,sans-serif;--ink:#1f3f7a}
+#start .startScene,#start .startScene *{font-family:var(--chub)}
+#start .startScene:after{background:linear-gradient(0deg,rgba(12,70,28,.30),rgba(12,70,28,0) 28%),radial-gradient(ellipse at 0% 50%,rgba(255,255,255,.2),transparent 55%)}
+
+/* ---- Logo ---- */
+#start .brandMark{border-bottom:0;filter:none;padding:0 0 clamp(8px,2vh,18px);animation:chubFloat 4s ease-in-out infinite}
+#start .brandMark:after{display:none}
+#start .brandSigil{width:clamp(30px,6.5vh,46px);height:clamp(30px,6.5vh,46px);margin:0 auto 4px;display:grid;place-items:center;border-radius:50%;font-size:clamp(16px,3.6vh,26px);color:#fff;background:radial-gradient(circle at 35% 30%,#fff7b0,#ffc83a 55%,#ff9a1f);border:3px solid #fff;box-shadow:0 4px 0 #c46a0a,0 0 22px rgba(255,214,90,.9);text-shadow:0 2px 0 rgba(160,80,0,.6);animation:chubSpin 9s linear infinite}
+#start .brandTitle{font-size:clamp(28px,min(4.6vw,10vh),54px);font-weight:800;letter-spacing:1px;line-height:1.02;white-space:nowrap;color:#ffe45c;background:none;-webkit-background-clip:border-box;background-clip:border-box;filter:none;
+ text-shadow:3.2px 0 0 var(--ink),2.77px 1.6px 0 var(--ink),1.6px 2.77px 0 var(--ink),0 3.2px 0 var(--ink),-1.6px 2.77px 0 var(--ink),-2.77px 1.6px 0 var(--ink),-3.2px 0 0 var(--ink),-2.77px -1.6px 0 var(--ink),-1.6px -2.77px 0 var(--ink),0 -3.2px 0 var(--ink),1.6px -2.77px 0 var(--ink),2.77px -1.6px 0 var(--ink),
+ 0 5px 0 #142a55,2.6px 4.6px 0 #142a55,-2.6px 4.6px 0 #142a55,3.2px 3px 0 #142a55,-3.2px 3px 0 #142a55,0 11px 14px rgba(0,0,0,.35)}
+#start .brandRpg{display:inline-block;margin-top:clamp(6px,1.4vh,12px);padding:2px 12px 2px 18px;font-size:clamp(11px,2.2vh,15px);font-weight:800;letter-spacing:6px;color:#fff;border:3px solid #fff;border-radius:999px;background:linear-gradient(180deg,#ff9fcb,#f2579b);box-shadow:0 3px 0 #a32763,0 6px 10px rgba(0,0,0,.22);text-shadow:0 2px 0 rgba(120,20,60,.55)}
+#start .brandWorld{margin-top:clamp(6px,1.4vh,10px);font-size:clamp(9px,1.7vh,12px);font-weight:800;letter-spacing:3px;color:#fff;text-shadow:1.5px 0 0 var(--ink),-1.5px 0 0 var(--ink),0 1.5px 0 var(--ink),0 -1.5px 0 var(--ink),0 3px 0 #142a55}
+#start .topGlyph{display:inline-block;color:#fff;text-shadow:0 2px 0 var(--ink),0 0 14px rgba(255,255,255,.9);animation:chubSpin 12s linear infinite}
+
+/* ---- Tombol menu ---- */
+#start .menuList{gap:clamp(6px,1.4vh,11px);margin-top:clamp(8px,2.2vh,18px)}
+#start .menuItem{--c1:#ffe36e;--c2:#ffb422;--lip:#c46a0a;position:relative;height:clamp(34px,7.6vh,52px);padding:0 6px 0 5px;gap:10px;border:3px solid #fff;border-radius:999px;clip-path:none;
+ font-size:clamp(11px,2.1vh,15px);font-weight:700;letter-spacing:.4px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.28);
+ background:linear-gradient(180deg,var(--c1),var(--c2));
+ box-shadow:0 5px 0 var(--lip),0 10px 14px rgba(0,0,0,.25),inset 0 3px 0 rgba(255,255,255,.55);
+ transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .12s,filter .15s;
+ animation:chubPop .55s cubic-bezier(.34,1.56,.64,1) backwards}
+#start #toChar{--c1:#ffe97a;--c2:#ffb021;--lip:#c4650a;height:clamp(38px,8.6vh,58px);font-size:clamp(12px,2.4vh,17px);color:#5a3200;text-shadow:0 1px 0 rgba(255,255,255,.7)}
+#start #toIndex{--c1:#c9a2ff;--c2:#8b57f0;--lip:#55309f;animation-delay:.07s}
+#start #toSettings{--c1:#86d6ff;--c2:#3a9bf2;--lip:#1d63b5;animation-delay:.14s}
+#start #toHowto{--c1:#ff9fcb;--c2:#f2579b;--lip:#a32763;animation-delay:.21s}
+#start #toAbout{--c1:#8cf0c8;--c2:#2dbf93;--lip:#16765b;animation-delay:.28s}
+#start .menuItem span{flex:0 0 auto;width:clamp(24px,5.2vh,36px);height:clamp(24px,5.2vh,36px);border-radius:50%;background:rgba(255,255,255,.96);color:var(--lip);font-size:clamp(13px,2.6vh,19px);text-shadow:none;box-shadow:0 2px 0 rgba(0,0,0,.18),inset 0 -3px 0 rgba(0,0,0,.08)}
+#start .menuItem b{opacity:0;margin-right:8px;font-size:1.4em;line-height:1;color:inherit;transition:opacity .15s}
+#start .menuItem:hover b,#start .menuItem.selected b{opacity:1}
+#start .menuItem:hover{transform:translateY(-3px) scale(1.05) rotate(-1.2deg);filter:brightness(1.07) saturate(1.1);box-shadow:0 8px 0 var(--lip),0 16px 20px rgba(0,0,0,.25),inset 0 3px 0 rgba(255,255,255,.6)}
+#start .menuItem:active{transform:translateY(4px) scale(.98);transition-duration:.05s;box-shadow:0 1px 0 var(--lip),0 3px 6px rgba(0,0,0,.25),inset 0 3px 0 rgba(255,255,255,.4)}
+#start .menuItem.selected{box-shadow:0 0 0 4px rgba(255,255,255,.55),0 5px 0 var(--lip),0 10px 16px rgba(0,0,0,.28),inset 0 3px 0 rgba(255,255,255,.55);animation:chubPop .55s cubic-bezier(.34,1.56,.64,1) backwards,chubBob 1.9s ease-in-out .6s infinite}
+#start .menuItem.selected:active{animation:none}
+#start .sidebarFoot{align-self:flex-start;margin-top:auto;padding:7px 12px;font-size:clamp(9px,1.7vh,12px);font-weight:700;letter-spacing:.2px;color:#3d6a35;background:rgba(255,255,255,.92);border:2px solid #fff;border-radius:16px 16px 16px 4px;box-shadow:0 3px 0 rgba(20,90,40,.35)}
+
+/* ---- Kartu kanan ---- */
+#start .worldCard,#start .continueBanner{border:3px solid #fff;border-radius:24px;padding:12px 14px;gap:12px;-webkit-backdrop-filter:none;backdrop-filter:none}
+#start .worldCard{background:linear-gradient(180deg,#fffdf0,#ffe8b0);box-shadow:0 5px 0 #d49a3c,0 12px 18px rgba(0,0,0,.22),inset 0 3px 0 #fff;animation:chubFloat 5s ease-in-out infinite}
+#start .worldCardIcon{width:44px;height:44px;border-radius:50%;border:3px solid #fff;color:#fff;background:radial-gradient(circle at 35% 30%,#ffe98a,#ff9a1f);box-shadow:0 3px 0 #b8600a;text-shadow:0 2px 0 rgba(150,70,0,.6)}
+#start .worldCard strong{color:#7a3f0c;font-weight:800;letter-spacing:1px}
+#start .worldCard small{color:#a8741f;font-weight:700;letter-spacing:.5px;line-height:1.35}
+#start .continueBanner{background:linear-gradient(180deg,#d9ffe6,#8fe9ab);box-shadow:0 5px 0 #3f9d5f,0 12px 18px rgba(0,0,0,.22),inset 0 3px 0 #fff;animation:chubFloat 5s ease-in-out -2.2s infinite}
+#start .continueBanner small{color:#2c7a4a;font-weight:800;letter-spacing:1px}
+#start .continueBanner strong{color:#12502b;font-weight:800}
+#start .continueBanner p{color:#2f7d4b;font-weight:700}
+#start .continueBanner button{flex:0 0 auto;width:40px;height:40px;border:3px solid #fff;border-radius:50%;background:linear-gradient(180deg,#ffe97a,#ffb021);color:#5a3200;font-size:15px;font-weight:900;box-shadow:0 4px 0 #c4650a;cursor:pointer;transition:transform .15s cubic-bezier(.34,1.56,.64,1)}
+#start .continueBanner button:hover{transform:scale(1.14) rotate(-6deg)}
+#start .continueBanner button:active{transform:translateY(3px) scale(.96);box-shadow:0 1px 0 #c4650a}
+
+/* ---- Keterangan kecil ---- */
+#start .sceneCaption{padding:5px 14px;font-size:clamp(7px,1.5vh,10px);font-weight:800;letter-spacing:2px;color:#fff;background:rgba(18,70,40,.5);border:2px solid rgba(255,255,255,.75);border-radius:999px;text-shadow:0 1px 0 rgba(0,0,0,.4)}
+#start .captionLine{width:6px;height:6px;border-radius:50%;background:#ffe45c}
+#start .verTag{padding:3px 10px;font-size:9px;font-weight:800;letter-spacing:1.5px;color:#fff;background:rgba(18,70,40,.5);border:2px solid rgba(255,255,255,.7);border-radius:999px;text-shadow:0 1px 0 rgba(0,0,0,.4)}
+#start .howtoOverlay{padding:14px 18px;font-size:12px;font-weight:700;line-height:1.8;color:#4b3417;background:#fffaf0;border:3px solid #fff;border-radius:22px;box-shadow:0 6px 0 #d49a3c,0 14px 22px rgba(0,0,0,.3)}
+#fullscreenPrompt{font-family:'Fredoka','Baloo 2','Nunito',ui-rounded,'Arial Rounded MT Bold',system-ui,sans-serif;font-weight:700;border:3px solid #fff;color:#5a3200;background:linear-gradient(180deg,#ffe97a,#ffb021);box-shadow:0 4px 0 #c4650a,0 10px 16px rgba(0,0,0,.3)}
+
+/* ---- Animasi ---- */
+@keyframes chubPop{0%{opacity:0;transform:translateX(-46px) scale(.4)}100%{opacity:1;transform:none}}
+@keyframes chubBob{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-3px) scale(1.035)}}
+@keyframes chubFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes chubSpin{to{transform:rotate(360deg)}}
+
+/* ---- Layar pendek (HP landscape) ---- */
+@media(orientation:landscape) and (max-height:430px){
+ #start .brandSigil,#start .sidebarFoot,#start .brandWorld{display:none}
+ #start .brandRpg{padding:1px 10px 1px 14px;font-size:11px;margin-top:4px}
+ #start .menuList{margin-top:8px;gap:6px}
+ #start .menuItem{height:clamp(30px,8.4vh,38px);font-size:11px}
+ #start #toChar{height:clamp(34px,9.4vh,42px);font-size:12px}
+}
+@media(max-width:600px){#start .worldCard,#start .continueBanner{padding:8px 10px;gap:8px;border-radius:18px}#start .worldCardIcon{width:30px;height:30px;font-size:17px}#start .continueBanner button{width:32px;height:32px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){#start .startScene *{animation:none!important}}

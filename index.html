@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- ECLIPSE RPG: SINGLE-FILE ENEMY ATLAS FIX -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Eternal Rift — Beyond The Rift</title>
+<!--
+  Eternal Rift — Beyond The Rift
+  File ini berisi kombinasi markup HTML, styling UI, dan logika game dalam satu file.
+  Struktur utama:
+    1. Metadata + font loading
+    2. Style global / HUD / menu / layar game
+    3. Viewport game + canvas + panel UI
+    4. Script game loop, input, enemy, quest, dan shop
+-->
+<link rel="stylesheet" href="css/main-style.css">
+<link rel="stylesheet" href="css/cine.css">
+<link rel="stylesheet" href="css/perk.css">
+<link rel="stylesheet" href="css/elite-ui.css">
+<link rel="stylesheet" href="css/canvas-viewport-fix.css">
+<link rel="stylesheet" href="css/gc-style.css">
+</head>
+<body>
+<div id="bootMask"><i></i><span id="bootTxt">MEMUAT ETERNAL RIFT…</span></div>
+<div id="game">
+<canvas id="c"></canvas>
+<div class="hud"><div class="panel">
+  <div class="name" id="hudName">⚔️ FIGHTER • Lv. 1</div>
+  <div class="hp-row"><div class="bar"><div id="hp" class="fill hp"></div></div><div id="survivalHud" class="survival-hud"><span id="survivalLabel">⏳</span><strong id="survivalTimer">01:00</strong><i><b id="survivalFill"></b></i></div></div>
+  <div class="bar" style="margin-top:4px"><div id="xp" class="fill xp"></div></div>
+  <div id="stats" class="stats">HP 100/100 • XP 0/100 • ATK 12</div>
+</div></div>
+<div id="topRight"><div id="minimap"><canvas id="mini" width="118" height="88"></canvas></div>
+<div id="quest">
+  <span id="stageProg">Stage 1 / 100</span><br>
+  <b id="stageName2">HUTAN AWAL</b><br>
+  <span id="diffTier" style="font-weight:900;color:#7dff9b">🌱 MUDAH</span><br>
+  <span id="kills">0 / 15</span><br>
+  <span id="goldText">💰 0 Gold</span> • <span id="potionText">🧪 0</span>
+</div></div>
+<button id="shopBtn" title="Inventory">🎒</button>
+<button id="pauseBtn" title="Pause">⏸</button>
+<div id="toast"></div>
+<div id="menuToast"></div>
+<div id="gcModal"><div class="gcBox"><div class="gcRune">✦</div><div id="gcTitle" class="gcTitle"></div><div id="gcMsg" class="gcMsg"></div><div class="gcBtns"><button id="gcCancel" type="button" class="gcBtn gcNo">Batal</button><button id="gcOk" type="button" class="gcBtn gcYes">Oke</button></div></div></div>
+<div id="combo"></div>
+<div id="zone">HUTAN AWAL</div>
+<div id="hpBarLow"></div>
+<div class="buffIcons" id="buffIcons"></div>
+<div id="controls">
+  <div id="joy"><div id="stick"></div></div>
+  <div class="actions">
+    <button id="dodgeBtn" class="btn"><i class="cdRing"></i><span class="pips"><b class="on"></b><b class="on"></b><b class="on"></b></span><span class="ico">🌀</span><span class="lbl">DASH</span><span class="cdNum"></span></button>
+    <button id="skillBtn" class="btn"><i class="cdRing"></i><span class="ico">✨</span><span class="lbl">SKILL</span><span class="cdNum"></span></button>
+    <button id="dashBtn" class="btn"><i class="cdRing"></i><span class="ico">💨</span><span class="lbl">DASH</span><span class="cdNum"></span></button>
+    <button id="ultBtn" class="btn"><i class="cdRing"></i><span class="ico">🌟</span><span class="lbl">ULT</span><span class="cdNum"></span></button>
+    <button id="attack" class="btn"><span class="ico">⚔️</span><span class="lbl">ATTACK</span></button>
+  </div>
+  <div class="hint">WASD • Space • Q • E • R • F Dash • 🛒 Shop • ESC Pause</div>
+</div>
+<div id="start" class="screen active"><div class="startScene">
+  <div class="sceneGlow"></div><div class="canopy"></div><div class="todTint"></div><i class="leaf" style="left:8%;font-size:16px;animation-duration:15s;animation-delay:-2s">🍃</i><i class="leaf" style="left:22%;font-size:20px;animation-duration:19s;animation-delay:-9s">🍃</i><i class="leaf" style="left:38%;font-size:14px;animation-duration:17s;animation-delay:-5s">🍃</i><i class="leaf" style="left:55%;font-size:18px;animation-duration:21s;animation-delay:-12s">🍃</i><i class="leaf" style="left:70%;font-size:15px;animation-duration:16s;animation-delay:-7s">🍃</i><i class="leaf" style="left:84%;font-size:20px;animation-duration:23s;animation-delay:-3s">🍃</i><i class="leaf" style="left:93%;font-size:14px;animation-duration:18s;animation-delay:-11s">🍃</i><div class="startTop"><span class="topGlyph">✦</span></div>
+  <aside class="startSidebar"><div class="brandMark"><div class="brandSigil">🌿</div><div class="brandTitle">ETERNAL RIFT</div><div class="brandRpg">BEYOND THE RIFT</div><div class="brandWorld">— 100 DUNIA —</div></div>
+    <div class="menuList"><button id="toChar" class="menuItem selected"><span>🌲</span> MULAI GAME <b>›</b></button><button id="toIndex" class="menuItem"><span>📖</span> Index Makhluk <b>›</b></button><button id="toSettings" class="menuItem"><span>⚙</span> Pengaturan</button><button id="toAbout" class="menuItem"><span>🍃</span> Tentang Game</button></div>
+    <p class="sidebarFoot">Petualangan besar menantimu...</p>
+  </aside>
+  <div class="verTag">v25 · BOSS+ EDITION</div><div class="heroSilhouette"><div class="heroAura"></div><div class="heroSword">╱</div></div>
+  <div class="startRight"><div class="worldCard"><span class="worldCardIcon">✧</span><div><strong>100 DUNIA</strong><small>JELAJAHI • BERTARUNG • KALAHKAN BOSS</small></div></div><div class="continueBanner" id="continueBanner"><div><small>PETUALANGAN TERAKHIR</small><strong>Lanjutkan Perjalanan</strong><p id="saveInfo">Stage 1 · Hutan Awal</p></div><button id="toContinue">▶</button></div></div>
+  <div class="sceneCaption"><span class="captionLine"></span><span>SEBUAH DUNIA DI AMBANG KEABADIAN</span><span class="captionLine"></span></div>
+  <div id="howtoPanel" class="howtoOverlay" style="display:none"><b>✦ CARA BERMAIN</b><br>WASD / Joystick untuk bergerak · Space untuk menyerang<br>Q = Skill · E = Dash · R = Ultimate · ESC = Pause<br>Kalahkan boss untuk membuka portal ke dunia berikutnya.</div>
+</div></div>
+<div id="charSel" class="screen"><div class="characterScene"><div class="charSceneBg"></div><header class="charHeader"><button id="charBack" class="backOrb">‹</button><div><div class="eyebrow">TAKDIR ADA DI TANGANMU</div><h2>PILIH <span>PAHLAWAN</span></h2><p>Setiap karakter memiliki gaya bertarung dan cerita uniknya.</p></div><div class="rosterCount"><strong id="charCount">100</strong><small>HERO TERSEDIA</small></div></header>
+  <div class="charMain"><div class="rosterPanel"><div class="rosterTitle"><span>DAFTAR PAHLAWAN</span><span class="rosterHint">GESER UNTUK MENJELAJAHI</span></div><div id="charTabs"><button data-cat="all" class="active">SEMUA</button><button data-cat="melee">MELEE</button><button data-cat="magic">MAGIC</button><button data-cat="ranged">RANGED</button><button data-cat="special">SPECIAL</button><button data-cat="summoner">SUMMONER</button><button data-cat="hybrid">HYBRID</button></div><div class="cards" id="charCards"></div><div class="rosterFooter"><span class="goldDot"></span> <span>HERO PILIHAN</span><span class="footerRule"></span><span id="selectedHeroLabel">FIGHTER</span></div></div>
+    <div class="portraitPanel"><div class="portraitRings"></div><div class="portraitTopline"><span>HERO PREVIEW</span><span class="liveDot">● LIVE</span></div><div class="portraitStage"><div class="portraitFloor"></div><div class="portraitParticles">✦　·　✧　·　✦</div><canvas id="heroPortrait" width="320" height="440"></canvas><div class="portraitNameplate"><small>THE ECLIPSE LEGENDS</small><strong id="portraitName">FIGHTER</strong><span id="portraitSub">THE WARRIOR</span></div></div><div class="portraitStats"><div><span>HP</span><div class="statTrack"><i id="portraitHp"></i></div></div><div><span>ATK</span><div class="statTrack"><i id="portraitAtk"></i></div></div><div><span>SPD</span><div class="statTrack"><i id="portraitSpd"></i></div></div></div></div>
+    <aside class="heroDetails"><div class="detailLabel">KARAKTER TERPILIH</div><div class="detailName" id="detailName">FIGHTER</div><div class="detailRole" id="detailRole">THE WARRIOR</div><p id="detailDesc">Seorang petualang yang siap menembus kegelapan.</p><div class="detailBars"><div><span>Serangan</span><b><i id="barAtk"></i></b></div><div><span>Pertahanan</span><b><i id="barHp"></i></b></div><div><span>Kecepatan</span><b><i id="barSpd"></i></b></div></div><div class="skillLabel">SKILL UTAMA</div><div id="portraitSkills" class="portraitSkills"></div><div id="charInfo"></div><button id="charNext" class="btn-big primary chooseButton">PILIH PAHLAWAN <span>➜</span></button><div class="startHint">Pilihanmu akan menentukan gaya bertarung.</div></aside>
+  </div>
+</div></div>
+<div id="settingsScreen" class="screen"><div class="box">
+  <p class="screenH" style="color:#80baff">⚙️ PENGATURAN</p>
+  <div class="settingsGroup">
+    <div class="groupLabel">🔊 AUDIO</div>
+    <div class="settingRow"><div class="settingInfo"><div class="settingIcon">🔊</div><div><div class="settingLabel">Efek Suara</div><div class="settingDesc">Serangan, skill, dan UI</div></div></div><div class="segmented" data-setting="sound"><button data-value="0">Off</button><button data-value="0.5">Rendah</button><button data-value="1">Normal</button></div></div>
+    <div class="settingRow"><div class="settingInfo"><div class="settingIcon">🎵</div><div><div class="settingLabel">Musik</div><div class="settingDesc">Musik latar, berubah saat boss</div></div></div><div class="segmented" data-setting="music"><button data-value="0">Off</button><button data-value="0.5">Rendah</button><button data-value="1">Normal</button></div></div>
+  </div>
+  <div class="settingsGroup">
+    <div class="groupLabel">🎮 GAMEPLAY</div>
+    <div class="settingRow"><div class="settingInfo"><div class="settingIcon">🎬</div><div><div class="settingLabel">Screen Shake</div><div class="settingDesc">Efek getar</div></div></div><div class="segmented" data-setting="shake"><button data-value="0">Off</button><button data-value="0.5">Rendah</button><button data-value="1">Normal</button></div></div>
+    <div class="settingRow"><div class="settingInfo"><div class="settingIcon">💥</div><div><div class="settingLabel">Angka Damage</div></div></div><div class="segmented" data-setting="showDamage"><button data-value="false">Off</button><button data-value="true">On</button></div></div>
+    <div class="settingRow"><div class="settingInfo"><div class="settingIcon">🎯</div><div><div class="settingLabel">Garis Bidik</div></div></div><div class="segmented" data-setting="showAimLine"><button data-value="false">Off</button><button data-value="true">On</button></div></div>
+    <div class="settingRow"><div class="settingInfo"><div class="settingIcon">✨</div><div><div class="settingLabel">Partikel</div></div></div><div class="segmented" data-setting="particles"><button data-value="0.4">Rendah</button><button data-value="1">Normal</button><button data-value="1.6">Tinggi</button></div></div>
+    <div class="settingRow"><div class="settingInfo"><div class="settingIcon">🌈</div><div><div class="settingLabel">Shader & Cahaya</div><div class="settingDesc">Efek visual</div></div></div><div class="segmented" data-setting="shader"><button data-value="0">Off</button><button data-value="1">Normal</button><button data-value="2">Tinggi</button></div></div>
+    <div class="settingRow"><div class="settingInfo"><div class="settingIcon">⚡</div><div><div class="settingLabel">Mode Performa</div><div class="settingDesc">AUTO menyesuaikan VFX demi frame rate stabil</div></div></div><div class="segmented" data-setting="performance"><button data-value="auto">Auto</button><button data-value="low">Rendah</button><button data-value="medium">Sedang</button><button data-value="high">Tinggi</button></div></div>
+    <div class="settingRow"><div class="settingInfo"><div class="settingIcon">⚔️</div><div><div class="settingLabel">Kesulitan</div></div></div><div class="segmented" data-setting="difficulty"><button data-value="0.75">Mudah</button><button data-value="1">Normal</button><button data-value="1.35">Sulit</button></div></div>
+    <div class="settingRow"><div class="settingInfo"><div class="settingIcon">📐</div><div><div class="settingLabel">Margin HUD</div><div class="settingDesc">Naikkan kalau HUD/tombol masih terpotong di tepi layar</div></div></div><div class="segmented" data-setting="hudSafe"><button data-value="0">Auto</button><button data-value="8">Kecil</button><button data-value="18">Sedang</button><button data-value="28">Besar</button></div></div>
+  </div>
+  <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);text-align:center">
+    <button id="resetSettings" class="btn-big ghost" style="margin-top:0">🔄 Reset</button>
+    <button id="settingsBack" class="btn-big primary">✓ SELESAI</button>
+  </div>
+</div></div>
+<div id="aboutScreen" class="screen"><div class="box" style="text-align:center">
+  <div style="font-size:54px;line-height:1">🌿</div>
+  <h1 style="margin-top:6px">ETERNAL RIFT</h1>
+  <p class="sub" style="color:#c8a0ff;letter-spacing:5px">100 DUNIA · 400 MONSTER</p>
+  <div class="aboutBadge">VERSI 25.0 — BOSS+</div>
+  <div class="aboutStats">
+    <div class="aboutStat"><div class="num">100</div><div class="lbl">Karakter</div></div>
+    <div class="aboutStat"><div class="num">100</div><div class="lbl">Stage</div></div>
+    <div class="aboutStat"><div class="num">400</div><div class="lbl">Monster</div></div>
+    <div class="aboutStat"><div class="num">3</div><div class="lbl">Fase Boss</div></div>
+    <div class="aboutStat"><div class="num">40+</div><div class="lbl">Boss Skill</div></div>
+    <div class="aboutStat"><div class="num">∞</div><div class="lbl">Kombinasi</div></div>
+  </div>
+  <div class="aboutText">Eternal Rift adalah RPG aksi 2D bergaya pixel art dengan 100 dunia, pilihan hero, monster, boss bertahap, skill, dan eksplorasi. Kalahkan musuh untuk memenuhi target stage, kalahkan boss untuk membuka portal, lalu lanjutkan perjalanan ke dunia berikutnya.<br><br><b>Sistem simpan:</b> progress hanya disimpan saat kamu memilih <b>SIMPAN & KELUAR</b> dari menu pause. Jika kalah atau keluar tanpa menyimpan, progress sesi berjalan tidak akan disimpan.</div>
+  <div class="creditsRow">
+    <div class="line"><b>🎨 ART & CODE</b> — Tim Eternal Rift</div>
+    <div class="line">Dibuat dengan <span class="heart">❤️</span></div>
+  </div>
+  <button id="aboutBack" class="btn-big primary" style="margin-top:14px">← KEMBALI</button>
+</div></div>
+<div id="shopScreen" class="screen"><div class="box">
+  <div class="shopHeader"><div class="title">🛒 TOKO</div><div class="gold">💰 <span id="shopGold">0</span></div></div>
+  <div class="shopStats" id="shopStats"></div>
+  <div class="shopGrid" id="shopGrid"></div>
+  <div class="shopFooter">
+    <button id="shopClose" class="btn-big gold">✓ TUTUP</button>
+    <button id="shopNext" class="btn-big primary" style="display:none">▶ LANJUT</button>
+  </div>
+</div></div>
+<div id="pauseScreen" class="screen"><div class="box" style="text-align:center">
+  <p class="screenH" style="color:#80baff">⏸ PAUSE</p>
+  <button id="pauseResume" class="btn-big primary">▶ LANJUT</button>
+  <button id="pauseRestart" class="btn-big gold">🔄 ULANGI STAGE</button>
+  <button id="pauseIndex" class="btn-big blue">📖 INDEX MAKHLUK</button>
+  <button id="pauseSettings" class="btn-big blue">⚙️ PENGATURAN</button>
+  <button id="pauseSaveQuit" class="btn-big gold">💾 SIMPAN & KELUAR</button>
+  <button id="pauseMenu" class="btn-big ghost">🏠 MENU UTAMA (TANPA SIMPAN)</button>
+  <p style="font-size:11px;color:#9eb1cf;line-height:1.5;margin:8px 0 0">Progress tersimpan otomatis di awal setiap stage (mulai Stage 2). Pilih SIMPAN &amp; KELUAR untuk menyimpan posisi saat ini.</p><div id="perkList" class="perkList"></div>
+</div></div>
+<div id="stageIntro" class="screen"><div class="stageIntroBox">
+  <div class="stageNum" id="siNum">STAGE 1 / 100</div>
+  <div class="stageName" id="siName">HUTAN AWAL</div>
+  <div id="siTier" style="font-size:13px;font-weight:900;letter-spacing:4px;margin-top:10px;color:#7dff9b">🌱 MUDAH</div>
+  <div class="desc" id="siDesc"></div>
+</div></div>
+<div id="bossIntro" aria-live="polite" aria-hidden="true">
+  <div class="bossIntroEyebrow">✦ &nbsp; TAKDIR SANG PENJAGA &nbsp; ✦</div>
+  <section class="bossDialogue" aria-label="Dialog boss">
+    <div class="bossDialogueTop">
+      <div class="bossDialogueIcon" id="bossDialogueIcon">👹</div>
+      <div class="bossDialogueMeta">
+        <div class="bossDialogueStage" id="bossDialogueStage">BOSS ENCOUNTER</div>
+        <div class="bossDialogueName" id="bossDialogueName">PENJAGA DUNIA</div>
+      </div>
+    </div>
+    <p class="bossDialogueQuote" id="bossDialogueQuote"></p>
+    <div class="bossDialogueFooter">
+      <span class="bossDialogueHint">SPACE / ENTER UNTUK MELANJUTKAN</span>
+      <button id="bossIntroContinue" type="button">HADAPI TAKDIR&nbsp; →</button>
+    </div>
+  </section>
+</div>
+<div id="loadingScreen" class="screen"><div class="loadingBox">
+  <div class="loadingSigil"><span>✦</span></div>
+  <div class="loadingTitle">ETERNAL RIFT</div><div class="loadingSub">BEYOND THE RIFT</div>
+  <div class="loadingStatus" id="loadingStatus">Membangunkan dunia...</div>
+  <div class="loadingTrack"><div id="loadingFill"></div></div>
+  <div class="loadingPercent"><span>MENYIAPKAN PETUALANGAN</span><b id="loadingPercent">0%</b></div>
+  <div class="loadingTip" id="loadingTip">Tips: Kalahkan boss untuk membuka portal menuju dunia berikutnya.</div>
+</div></div>
+<div id="indexScreen" class="screen"><div class="idxWrap">
+ <header class="idxHead"><button id="indexBack" class="backOrb" aria-label="Kembali">‹</button><div><div class="eyebrow">ENSIKLOPEDIA ECLIPSE</div><h2>INDEX <span>MAKHLUK</span></h2></div><div class="idxCount"><strong id="idxCountNum">0</strong><small id="idxCountTot">/ 500</small></div></header>
+ <div class="idxBars"><div><span>MONSTER <b id="idxTxtM">0 / 400</b></span><i><u id="idxBarM"></u></i></div><div><span>BOSS <b id="idxTxtB">0 / 100</b></span><i><u id="idxBarB"></u></i></div></div>
+ <div class="idxTools"><div id="idxTabs"><button data-f="all" class="active">SEMUA</button><button data-f="monster">MONSTER</button><button data-f="boss">BOSS</button><button data-f="found">TERKUMPUL</button><button data-f="locked">BELUM</button></div><select id="idxJump" aria-label="Lompat ke stage"></select></div>
+ <div id="idxGrid" class="idxGrid"></div>
+ <div id="idxDetail" class="idxDetail"></div>
+</div></div>
+
+<button id="fullscreenPrompt" type="button">⛶ AKTIFKAN LANDSCAPE & FULLSCREEN</button>
+<div id="rotateNotice"><div class="rotateCard"><span class="rotateIcon">📱</span><div class="rotateTitle">PUTAR PERANGKATMU</div><div class="rotateText">Eternal Rift dirancang untuk dimainkan dalam mode <b>LANDSCAPE</b>. Putar HP ke samping untuk melanjutkan petualangan.</div></div></div>
+<div id="perkScreen" class="screen"><div class="perkWrap">
+  <div class="perkHead"><div class="perkUp">NAIK LEVEL</div><div class="perkLevel" id="perkLevel">Level 2</div><div class="perkMore" id="perkMore">Pilih satu upgrade</div></div>
+  <div class="perkCards" id="perkCards"></div>
+  <div class="perkHint">Ketuk kartu, atau tekan 1 / 2 / 3</div>
+</div></div>
+<div id="death" class="screen"><div class="box">
+  <div style="font-size:42px">💀</div>
+  <h2 style="margin:8px 0">Kamu Tumbang</h2>
+  <p style="color:#b9c6b9;font-size:13px">Coba ubah strategi, atau pilih karakter lain.</p>
+  <button id="retryStage" class="btn-big primary">🔄 COBA STAGE INI</button>
+  <button id="toMenu" class="btn-big ghost">🏠 MENU UTAMA</button>
+</div></div>
+<div id="win" class="screen"><div class="winBox">
+  <div style="font-size:52px">👑</div>
+  <h1>VICTORY</h1>
+  <p class="sub" style="color:#ffd36a">KAMU MENAKLUKKAN 100 DUNIA!</p>
+  <p style="color:#e8d8a0;font-size:13px;line-height:1.6">Dari Hutan Awal sampai Kehancuran Dunia.<br>Kau telah menjadi legenda.</p>
+  <button id="playAgain" class="btn-big primary" style="background:linear-gradient(180deg,#ffd97a,#e0a020);color:#241600">🔄 MAIN LAGI</button>
+</div></div>
+</div>
+/* ==========================================================
+   Game runtime, effects, UI state, and gameplay loop
+   ========================================================== */
+<script src="js/effects-atlas.js"></script>
+<script src="js/game-core.js"></script>
+<script src="js/boss-assets.js"></script>
+<script src="js/balance-slime-biome.js"></script>
+<script src="js/slime-variants.js"></script>
+<script src="js/music-data.js"></script>
+<link rel="stylesheet" href="css/chubby-menu.css">
+<link rel="stylesheet" href="css/forest-theme.css">
+<link rel="stylesheet" href="css/safe-fit.css">
+<link rel="stylesheet" href="css/ui-polish.css">
+<link rel="stylesheet" href="css/eternal-rift-gameplay-ui-cleanup.css">
+<script src="js/forest-sfx.js"></script>
+
+<link rel="stylesheet" href="css/fix-pack.css">
+
+<script src="js/fix-pack.js"></script>
+<link rel="stylesheet" href="css/unlock.css">
+<link rel="stylesheet" href="css/fix3.css">
+</body>
+</html>

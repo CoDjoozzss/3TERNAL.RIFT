@@ -1,0 +1,14 @@
+/* ===== FIX LAYAR: game pas di area terlihat + HUD/tombol di dalam batas aman ===== */
+#game,body.game-playing #game,:fullscreen #game,#game:fullscreen{position:fixed!important;left:var(--fit-l,0px)!important;top:var(--fit-t,0px)!important;right:auto!important;bottom:auto!important;width:var(--fit-w,100%)!important;height:var(--fit-h,100%)!important;max-width:none!important;max-height:none!important;border-radius:0!important}
+#game{--sat:calc(env(safe-area-inset-top,0px) + var(--hm,0px));--sab:calc(env(safe-area-inset-bottom,0px) + var(--hm,0px));--sal:calc(env(safe-area-inset-left,0px) + var(--hm,0px));--sar:calc(env(safe-area-inset-right,0px) + var(--hm,0px))}
+#game .hud{left:calc(14px + var(--sal));top:calc(12px + var(--sat))}
+#game #topRight{right:calc(14px + var(--sar));top:calc(12px + var(--sat))}
+#game #zone{top:calc(10px + var(--sat))}
+#game #shopBtn{left:calc(14px + var(--sal));top:calc(98px + var(--sat))}
+#game #pauseBtn{left:calc(14px + var(--sal));top:calc(154px + var(--sat))}
+#game #relicBar{left:calc(68px + var(--sal));top:calc(102px + var(--sat))}
+#game .buffIcons{left:calc(14px + var(--sal));bottom:calc(130px + var(--sab))}
+#game #joy{left:calc(22px + var(--sal));bottom:calc(22px + var(--sab))}
+#game .actions{right:calc(20px + var(--sar));bottom:calc(18px + var(--sab))}
+#game .hint{bottom:calc(10px + var(--sab))}
+@media(max-width:600px){#game #shopBtn{left:calc(9px + var(--sal));top:calc(88px + var(--sat))}#game #pauseBtn{left:calc(9px + var(--sal));top:calc(140px + var(--sat))}}
